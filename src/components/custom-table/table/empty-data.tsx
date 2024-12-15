@@ -7,7 +7,7 @@ const EmptyDataTableCustom = () => {
                     alt='data empty'
                     className='w-full h-auto object-cover max-w-[100px]'
                 />
-                <p>Data Kosong</p>
+                <p className="text-primary">Data Kosong</p>
             </div>
         </>
     )
