@@ -20,7 +20,7 @@ const HeaderSectionTableCustom = ({ title, backUrl }: Props) => {
             <section className='p-5 pb-0'>
                 <div className='flex justify-between items-end border-b-[1px] border-slate-300 pb-4'>
                     <div>
-                        <h1 className='font-semibold text-lg cursor-default'>
+                        <h1 className='font-semibold text-primary text-lg cursor-default'>
                             {title}
 
                         </h1>
