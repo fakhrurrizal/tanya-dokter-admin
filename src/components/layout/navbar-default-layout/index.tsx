@@ -96,7 +96,8 @@ const Navbar: React.FC<NavbarProps> = (Props: NavbarProps) => {
                                 sx={({ breakpoints }) => ({
                                     width: `${30}px`,
                                     ml: 12,
-                                    [breakpoints.down('md')]: {
+                                    display: 'block',
+                                    [breakpoints.up('md')]: {
                                         display: 'none',
                                     },
                                 })}
@@ -107,18 +108,19 @@ const Navbar: React.FC<NavbarProps> = (Props: NavbarProps) => {
                                 </IconButton>
                             </Box>
 
-                            <Box
+                            {/* <Box
                                 sx={({ breakpoints }) => ({
+                                    display: 'block',
                                     [breakpoints.up('md')]: {
                                         display: 'none',
                                     },
                                 })}
                                 className='flex items-center'
                             >
-                                <IconButton onClick={handleDrawerToggle}>
+                                <IconButton onClick={toggleExpandDrawer}>
                                     <MenuOutlined color='primary' />
                                 </IconButton>
-                            </Box>
+                            </Box> */}
                         </Box>
 
                         <div className='flex flex-0 gap-[10px] items-center'>

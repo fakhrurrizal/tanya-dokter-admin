@@ -4,6 +4,7 @@ export const endpoints = {
   category_specialst: 'category-specialist',
   files: 'file',
   data_drugs: 'data-drugs',
+  user: 'user',
 } as const;
 
 export type ApiEndpoint = keyof typeof endpoints;
