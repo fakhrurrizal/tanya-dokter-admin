@@ -7,6 +7,7 @@ export const UsersSchema = z
     experience: z.string().min(1, { message: 'Pengalaman tidak boleh kosong' }),
     email: z.string().email().min(1, { message: 'Email tidak boleh kosong' }),
     password: z.string().optional(),
+    role_id: z.number().optional(),
     address: z.string().optional(),
     category_id: z
       .object({

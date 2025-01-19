@@ -29,6 +29,7 @@ const EditUsers = (props: ModalEdit) => {
             fullname: row?.fullname,
             email: row?.email,
             code: row?.code,
+            role_id: row?.role_id,
             experience: row?.experience,
             category_id: {
                 id: row?.category?.id,
