@@ -5,7 +5,7 @@ import axiosInterceptor from "@/config/axios.config";
 
 export const useCategorySpecialistAllParams = (param: any) => {
   const endpoint = queryString.stringifyUrl({
-    url: getApi('category_specialst'),
+    url: getApi("category_specialst"),
     query: param,
   });
 
@@ -16,6 +16,6 @@ export const useCategorySpecialistAllParams = (param: any) => {
       return res.data;
     },
     refetchOnWindowFocus: false,
-    queryKey: ['LIST_CATEGORY_SPECIALIST_ALL', param],
+    queryKey: ["LIST_CATEGORY_SPECIALIST_ALL", param],
   });
 };

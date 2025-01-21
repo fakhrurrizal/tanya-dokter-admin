@@ -1,11 +1,11 @@
-import * as z from 'zod';
+import * as z from "zod";
 
 export const UsersSchema = z
   .object({
-    code: z.string().min(1, { message: 'Kode tidak boleh kosong' }),
-    fullname: z.string().min(1, { message: 'Nama tidak boleh kosong' }),
-    experience: z.string().min(1, { message: 'Pengalaman tidak boleh kosong' }),
-    email: z.string().email().min(1, { message: 'Email tidak boleh kosong' }),
+    code: z.string().min(1, { message: "Kode tidak boleh kosong" }),
+    fullname: z.string().min(1, { message: "Nama tidak boleh kosong" }),
+    experience: z.string().min(1, { message: "Pengalaman tidak boleh kosong" }),
+    email: z.string().email().min(1, { message: "Email tidak boleh kosong" }),
     password: z.string().optional(),
     role_id: z.number().optional(),
     address: z.string().optional(),

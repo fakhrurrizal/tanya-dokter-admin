@@ -1,10 +1,10 @@
 export const endpoints = {
-  login: 'auth/signin',
-  me: 'auth/user',
-  category_specialst: 'category-specialist',
-  files: 'file',
-  data_drugs: 'data-drugs',
-  user: 'user',
+  login: "auth/signin",
+  me: "auth/user",
+  category_specialst: "category-specialist",
+  files: "file",
+  data_drugs: "data-drugs",
+  user: "user",
 } as const;
 
 export type ApiEndpoint = keyof typeof endpoints;

@@ -1,12 +1,12 @@
-import axiosInterceptor from '@/config/axios.config';
-import { ResponseMe } from '@/types';
-import { getApi, localKey } from '@/utils/constants';
-import axios from 'axios';
-import { create } from 'zustand';
+import axiosInterceptor from "@/config/axios.config";
+import { ResponseMe } from "@/types";
+import { getApi, localKey } from "@/utils/constants";
+import axios from "axios";
+import { create } from "zustand";
 
 export interface Auth {
   accessToken?: string;
-  user?: ResponseMe['data'] & { isDemo?: boolean };
+  user?: ResponseMe["data"] & { isDemo?: boolean };
 }
 
 const emptyUser: Auth = {
@@ -15,7 +15,7 @@ const emptyUser: Auth = {
 };
 
 const getInitialState: () => Auth = () => {
-  if (typeof window === 'undefined') return emptyUser;
+  if (typeof window === "undefined") return emptyUser;
 
   const storedData = localStorage.getItem(localKey.auth);
 
@@ -26,7 +26,7 @@ const getInitialState: () => Auth = () => {
   const parseStoredData: Auth = JSON.parse(atob(storedData));
 
   if (parseStoredData.accessToken) {
-    axios.defaults.headers.common['Authorization'] =
+    axios.defaults.headers.common["Authorization"] =
       parseStoredData.accessToken;
   }
 
@@ -40,7 +40,7 @@ export interface AuthState {
 
   setAuth: (auth: Auth) => void;
 
-  setUser: (auth: Auth['user']) => void;
+  setUser: (auth: Auth["user"]) => void;
 
   isLogin: () => boolean;
 
@@ -70,7 +70,7 @@ export const useAuth = create<AuthState>()((set, getState) => ({
   setUser: (user: any) => {
     localStorage.setItem(
       localKey.auth,
-      btoa(JSON.stringify({ ...getState().value, user }))
+      btoa(JSON.stringify({ ...getState().value, user })),
     );
 
     return set((state) => ({

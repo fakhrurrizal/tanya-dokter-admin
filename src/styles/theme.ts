@@ -1,7 +1,7 @@
-import { useApplicationSettings } from '@/services';
-import { colors } from '@/utils/constants';
-import { alpha, createTheme } from '@mui/material/styles';
-import { useMemo } from 'react';
+import { useApplicationSettings } from "@/services";
+import { colors } from "@/utils/constants";
+import { alpha, createTheme } from "@mui/material/styles";
+import { useMemo } from "react";
 
 export const useIsDarkMode = () => {
   // const systemScreenMode = useMediaQuery('(prefers-color-scheme: dark)')
@@ -10,23 +10,23 @@ export const useIsDarkMode = () => {
 
   // if (screenMode === 'SYSTEM') return systemScreenMode
 
-  return screenMode === 'DARK';
+  return screenMode === "DARK";
 };
 
 export const useGetTheme = () => {
   const isDarkMode = useIsDarkMode();
 
-  const primary = '#116487';
+  const primary = "#116487";
 
-  const error = '#ff3a6e';
+  const error = "#ff3a6e";
 
-  const backgroundColor = isDarkMode ? '#121212' : '#FFFFFF';
+  const backgroundColor = isDarkMode ? "#121212" : "#FFFFFF";
 
   const borderRadius = 4;
 
-  const fontColor = isDarkMode ? '#F4F5FA' : '#474955';
+  const fontColor = isDarkMode ? "#F4F5FA" : "#474955";
 
-  const fontDark = isDarkMode ? '#474955' : primary;
+  const fontDark = isDarkMode ? "#474955" : primary;
 
   const useTheme = useMemo(
     () =>
@@ -38,7 +38,7 @@ export const useGetTheme = () => {
         },
 
         palette: {
-          mode: isDarkMode ? 'dark' : 'light',
+          mode: isDarkMode ? "dark" : "light",
 
           primary: {
             main: primary,
@@ -49,11 +49,11 @@ export const useGetTheme = () => {
           },
 
           success: {
-            main: '#6fd943',
+            main: "#6fd943",
           },
 
           secondary: {
-            main: '#808080',
+            main: "#808080",
           },
 
           warning: {
@@ -106,8 +106,8 @@ export const useGetTheme = () => {
           MuiInputAdornment: {
             styleOverrides: {
               root: {
-                '& .MuiTypography-root': {
-                  color: alpha('#000000', 0.87),
+                "& .MuiTypography-root": {
+                  color: alpha("#000000", 0.87),
                 },
               },
             },
@@ -116,17 +116,17 @@ export const useGetTheme = () => {
           MuiSelect: {
             defaultProps: {
               fullWidth: true,
-              size: 'small',
+              size: "small",
             },
           },
 
           MuiButton: {
             styleOverrides: {
               root: {
-                boxShadow: 'none',
-                textTransform: 'none',
-                ':hover': {
-                  boxShadow: 'none',
+                boxShadow: "none",
+                textTransform: "none",
+                ":hover": {
+                  boxShadow: "none",
                 },
               },
             },
@@ -135,8 +135,8 @@ export const useGetTheme = () => {
           MuiListItemIcon: {
             styleOverrides: {
               root: {
-                minWidth: '38px',
-                color: 'rgba(0, 0, 0, 0.54)',
+                minWidth: "38px",
+                color: "rgba(0, 0, 0, 0.54)",
               },
             },
           },
@@ -144,7 +144,7 @@ export const useGetTheme = () => {
           MuiListItem: {
             styleOverrides: {
               root: {
-                borderRadius: borderRadius + 'px',
+                borderRadius: borderRadius + "px",
               },
             },
           },
@@ -152,25 +152,25 @@ export const useGetTheme = () => {
           MuiListItemButton: {
             styleOverrides: {
               root: {
-                borderRadius: borderRadius + 'px',
+                borderRadius: borderRadius + "px",
 
-                ':hover': {
-                  boxShadow: 'none',
+                ":hover": {
+                  boxShadow: "none",
                 },
 
-                '&.Mui-selected': {
+                "&.Mui-selected": {
                   backgroundColor: alpha(primary, 0.1),
 
-                  '& .MuiButtonBase-root': {
+                  "& .MuiButtonBase-root": {
                     color: primary,
                   },
 
-                  '& .MuiTypography-root': {
+                  "& .MuiTypography-root": {
                     color: primary,
                     fontWeight: 500,
                   },
 
-                  '& .MuiSvgIcon-root': {
+                  "& .MuiSvgIcon-root": {
                     color: primary,
                   },
                 },
@@ -181,13 +181,13 @@ export const useGetTheme = () => {
           MuiStepLabel: {
             styleOverrides: {
               root: {
-                '& .MuiSvgIcon-root': {
-                  width: '1.25em',
-                  height: '1.25em',
+                "& .MuiSvgIcon-root": {
+                  width: "1.25em",
+                  height: "1.25em",
                 },
               },
               label: {
-                fontSize: '0.85rem',
+                fontSize: "0.85rem",
               },
             },
           },
@@ -195,8 +195,8 @@ export const useGetTheme = () => {
           MuiCard: {
             styleOverrides: {
               root: {
-                boxShadow: 'none',
-                backgroundImage: 'none',
+                boxShadow: "none",
+                backgroundImage: "none",
               },
             },
           },
@@ -211,9 +211,9 @@ export const useGetTheme = () => {
 
           MuiTooltip: {
             defaultProps: {
-              placement: 'bottom',
+              placement: "bottom",
               sx: {
-                fontSize: '13px',
+                fontSize: "13px",
               },
             },
           },
@@ -221,7 +221,7 @@ export const useGetTheme = () => {
           MuiButtonGroup: {
             styleOverrides: {
               root: {
-                boxShadow: 'none',
+                boxShadow: "none",
               },
             },
           },
@@ -229,8 +229,8 @@ export const useGetTheme = () => {
           MuiCardContent: {
             styleOverrides: {
               root: {
-                ':last-child': {
-                  paddingBottom: '16px',
+                ":last-child": {
+                  paddingBottom: "16px",
                 },
               },
             },
@@ -239,8 +239,8 @@ export const useGetTheme = () => {
           MuiAutocomplete: {
             styleOverrides: {
               tag: ({ ownerState }) => ({
-                ...(ownerState.size === 'small' && {
-                  height: '22px',
+                ...(ownerState.size === "small" && {
+                  height: "22px",
                 }),
               }),
             },
@@ -248,7 +248,7 @@ export const useGetTheme = () => {
         },
       }),
 
-    [isDarkMode, backgroundColor, fontColor, fontDark, primary]
+    [isDarkMode, backgroundColor, fontColor, fontDark, primary],
   );
 
   return useTheme;

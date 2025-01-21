@@ -1,11 +1,11 @@
-import { ButtonProps } from '@/components';
-import { ReactNode } from 'react';
-import { create } from 'zustand';
+import { ButtonProps } from "@/components";
+import { ReactNode } from "react";
+import { create } from "zustand";
 import {
   DialogProps,
   DialogTitleProps,
   DialogActionsProps,
-} from '@mui/material';
+} from "@mui/material";
 
 interface AlertDialogState {
   title?: string;
@@ -13,14 +13,14 @@ interface AlertDialogState {
   buttonOkProps: ButtonProps;
   buttonCancelProps: ButtonProps;
   open: boolean;
-  dialogProps?: Omit<DialogProps, 'open'>;
+  dialogProps?: Omit<DialogProps, "open">;
   dialogTitleProps?: DialogTitleProps;
   canClose?: boolean;
   dialogActionProps?: DialogActionsProps;
 }
 
 const initialState: AlertDialogState = {
-  title: '',
+  title: "",
   buttonOkProps: {},
   content: null,
   open: false,
@@ -33,7 +33,7 @@ const initialState: AlertDialogState = {
 
 interface AlertState {
   value: AlertDialogState;
-  setOpen: (data: Omit<AlertDialogState, 'open'>) => void;
+  setOpen: (data: Omit<AlertDialogState, "open">) => void;
   setClose: () => void;
   setForceClose: () => void;
 }

@@ -31,7 +31,7 @@ export interface ResponseLogin {
   data?: {
     access_token: string;
     expiration: string;
-    user: ResponseMe['data'];
+    user: ResponseMe["data"];
   };
 }
 
@@ -88,7 +88,6 @@ export interface DataDrugsResponse {
   order: string;
   last_updated: Date;
 }
-
 
 export interface ResponseUploadFile {
   data: {

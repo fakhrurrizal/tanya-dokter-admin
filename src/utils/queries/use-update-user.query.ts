@@ -1,10 +1,10 @@
-import axiosInterceptor from '@/config/axios.config';
-import { useQuery } from 'react-query';
-import { getApi } from '../constants';
-import { useAuth } from '@/services';
-import { ResponseMe } from '@/types';
+import axiosInterceptor from "@/config/axios.config";
+import { useQuery } from "react-query";
+import { getApi } from "../constants";
+import { useAuth } from "@/services";
+import { ResponseMe } from "@/types";
 
-const endpointMe = getApi('me');
+const endpointMe = getApi("me");
 
 export const useUpdateUser = () =>
   useQuery({
@@ -13,7 +13,7 @@ export const useUpdateUser = () =>
 
       return res.data;
     },
-    queryKey: ['ME'],
+    queryKey: ["ME"],
 
     enabled: false,
   });
@@ -25,7 +25,7 @@ export const useMe = () =>
 
       return res.data;
     },
-    queryKey: ['ME'],
+    queryKey: ["ME"],
 
     enabled: false,
 

@@ -6,7 +6,7 @@ import { DataDrugsResponse } from "@/types";
 
 export const useDataDrugsAllParams = (param: any) => {
   const endpoint = queryString.stringifyUrl({
-    url: getApi('data_drugs'),
+    url: getApi("data_drugs"),
     query: param,
   });
 
@@ -17,6 +17,6 @@ export const useDataDrugsAllParams = (param: any) => {
       return res.data;
     },
     refetchOnWindowFocus: false,
-    queryKey: ['LIST_DATA_DRUGS_ALL', param],
+    queryKey: ["LIST_DATA_DRUGS_ALL", param],
   });
 };

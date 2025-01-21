@@ -1,17 +1,17 @@
-import { setTokenExpiredModal } from '@/components';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { setTokenExpiredModal } from "@/components";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const axiosInterceptor = axios.create();
 axiosInterceptor.interceptors.response.use(
   function (response) {
-    if (response.config.method === 'post') {
+    if (response.config.method === "post") {
       const successMessage = response?.data?.message;
       if (successMessage) toast.success(successMessage);
-    } else if (response.config.method === 'delete') {
+    } else if (response.config.method === "delete") {
       const successMessage = response?.data?.message;
       if (successMessage) toast.success(successMessage);
-    } else if (response.config.method === 'put') {
+    } else if (response.config.method === "put") {
       const successMessage = response?.data?.message;
       if (successMessage) toast.success(successMessage);
     }
@@ -30,15 +30,15 @@ axiosInterceptor.interceptors.response.use(
     console.log({ MessageError });
 
     const firstMessageError: string = Array.isArray(
-      error.response?.data?.details
+      error.response?.data?.details,
     )
       ? error.response?.data?.details?.[0]?.error
-      : '';
+      : "";
 
     const secondMessageError: string = error.response?.data?.details;
 
     const thirdMessageError: string = error.response?.data?.message;
-    if (MessageError == 'You have already signed in on another device.') {
+    if (MessageError == "You have already signed in on another device.") {
       return Promise.reject(error);
     } else if (firstMessageError) {
       toast.error(firstMessageError);
@@ -57,7 +57,7 @@ axiosInterceptor.interceptors.response.use(
 
       return Promise.reject(error);
     }
-  }
+  },
 );
 
 export default axiosInterceptor;

@@ -1,93 +1,107 @@
-import { localKey } from '@/utils/constants';
-import { create } from 'zustand'
+import { localKey } from "@/utils/constants";
+import { create } from "zustand";
 
-export type ScreenMode = 'DARK' | 'LIGHT'
+export type ScreenMode = "DARK" | "LIGHT";
 
-export type Language = 'id' | 'en-US'
+export type Language = "id" | "en-US";
 
 export interface ApplicationSettings {
-    screenMode: ScreenMode
-    expandSidebar: boolean
-    appLanguage: Language
+  screenMode: ScreenMode;
+  expandSidebar: boolean;
+  appLanguage: Language;
 }
 
 export interface ApplicationSettingsState {
-    value: ApplicationSettings
+  value: ApplicationSettings;
 
-    changeScreenMode: (screenMode: ScreenMode) => void
+  changeScreenMode: (screenMode: ScreenMode) => void;
 
-    toggleExpandSidebar: () => void
+  toggleExpandSidebar: () => void;
 
-    setExpandSidebar: (expandSidebar: boolean) => void
+  setExpandSidebar: (expandSidebar: boolean) => void;
 
-    changeLanguage: (lang: Language) => void
+  changeLanguage: (lang: Language) => void;
 }
 
 const defaultValue: ApplicationSettings = {
-    screenMode: 'LIGHT',
-    expandSidebar: true,
-    appLanguage: 'en-US',
-}
+  screenMode: "LIGHT",
+  expandSidebar: true,
+  appLanguage: "en-US",
+};
 
 const getInitialState: () => ApplicationSettings = () => {
-    if (typeof window === 'undefined') return defaultValue
+  if (typeof window === "undefined") return defaultValue;
 
-    const storedData = localStorage.getItem(localKey.application_settings)
+  const storedData = localStorage.getItem(localKey.application_settings);
 
-    if (!storedData) return defaultValue
+  if (!storedData) return defaultValue;
 
-    const parseStoredData: ApplicationSettings = JSON.parse(storedData)
+  const parseStoredData: ApplicationSettings = JSON.parse(storedData);
 
-    return parseStoredData
-}
+  return parseStoredData;
+};
 
-const initialState: ApplicationSettings = getInitialState()
+const initialState: ApplicationSettings = getInitialState();
 
-export const useApplicationSettings = create<ApplicationSettingsState>()(set => ({
+export const useApplicationSettings = create<ApplicationSettingsState>()(
+  (set) => ({
     value: initialState,
 
-    changeScreenMode: screenMode =>
-        set(state => {
-            const nextState: ApplicationSettings = { ...state.value, screenMode }
+    changeScreenMode: (screenMode) =>
+      set((state) => {
+        const nextState: ApplicationSettings = { ...state.value, screenMode };
 
-            localStorage.setItem(localKey.application_settings, JSON.stringify(nextState))
+        localStorage.setItem(
+          localKey.application_settings,
+          JSON.stringify(nextState),
+        );
 
-            return { ...state, value: nextState }
-        }),
+        return { ...state, value: nextState };
+      }),
 
     toggleExpandSidebar: () =>
-        set(state => {
-            const nextState: ApplicationSettings = {
-                ...state.value,
-                expandSidebar: !state.value.expandSidebar,
-            }
+      set((state) => {
+        const nextState: ApplicationSettings = {
+          ...state.value,
+          expandSidebar: !state.value.expandSidebar,
+        };
 
-            localStorage.setItem(localKey.application_settings, JSON.stringify(nextState))
+        localStorage.setItem(
+          localKey.application_settings,
+          JSON.stringify(nextState),
+        );
 
-            return { ...state, value: nextState }
-        }),
+        return { ...state, value: nextState };
+      }),
 
-    setExpandSidebar: expandSidebar =>
-        set(state => {
-            const nextState: ApplicationSettings = {
-                ...state.value,
-                expandSidebar,
-            }
+    setExpandSidebar: (expandSidebar) =>
+      set((state) => {
+        const nextState: ApplicationSettings = {
+          ...state.value,
+          expandSidebar,
+        };
 
-            localStorage.setItem(localKey.application_settings, JSON.stringify(nextState))
+        localStorage.setItem(
+          localKey.application_settings,
+          JSON.stringify(nextState),
+        );
 
-            return { ...state, value: nextState }
-        }),
+        return { ...state, value: nextState };
+      }),
 
-    changeLanguage: lang =>
-        set(state => {
-            const nextState: ApplicationSettings = {
-                ...state.value,
-                appLanguage: lang,
-            }
+    changeLanguage: (lang) =>
+      set((state) => {
+        const nextState: ApplicationSettings = {
+          ...state.value,
+          appLanguage: lang,
+        };
 
-            localStorage.setItem(localKey.application_settings, JSON.stringify(nextState))
+        localStorage.setItem(
+          localKey.application_settings,
+          JSON.stringify(nextState),
+        );
 
-            return { ...state, value: nextState }
-        }),
-}))
+        return { ...state, value: nextState };
+      }),
+  }),
+);

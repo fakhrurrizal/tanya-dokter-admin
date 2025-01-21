@@ -6,10 +6,10 @@ export type NavbarItem = {
 };
 
 export interface GeneralOption {
-    label: string
-    id: string | number
+  label: string;
+  id: string | number;
 }
 
 export interface GeneralOptionsResponse {
-    data: GeneralOption[]
+  data: GeneralOption[];
 }

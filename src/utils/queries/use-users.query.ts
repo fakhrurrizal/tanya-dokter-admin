@@ -1,11 +1,11 @@
-import queryString from 'query-string';
-import { getApi } from '../constants';
-import { useQuery } from 'react-query';
-import axiosInterceptor from '@/config/axios.config';
+import queryString from "query-string";
+import { getApi } from "../constants";
+import { useQuery } from "react-query";
+import axiosInterceptor from "@/config/axios.config";
 
 export const useGetUser = (param: any) => {
   const endpoint = queryString.stringifyUrl({
-    url: getApi('user'),
+    url: getApi("user"),
     query: param,
   });
 
@@ -16,6 +16,6 @@ export const useGetUser = (param: any) => {
       return res.data;
     },
     refetchOnWindowFocus: false,
-    queryKey: ['LIST_GET_USERS', param],
+    queryKey: ["LIST_GET_USERS", param],
   });
 };

@@ -1,165 +1,176 @@
-import Icon from '@/components/icon'
-import { SzhsinMenu } from '@/components/szhsin'
-import { useAuth } from '@/services'
-import { NavbarItem } from '@/types'
+import Icon from "@/components/icon";
+import { SzhsinMenu } from "@/components/szhsin";
+import { useAuth } from "@/services";
+import { NavbarItem } from "@/types";
 import {
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemButtonProps,
-    ListItemIcon,
-    ListItemText,
-    SxProps,
-    Theme,
-    Tooltip,
-    Typography,
-} from '@mui/material'
-import { useRouter } from 'next/router'
-import { FunctionComponent, useRef, useState } from 'react'
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemButtonProps,
+  ListItemIcon,
+  ListItemText,
+  SxProps,
+  Theme,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { useRouter } from "next/router";
+import { FunctionComponent, useRef, useState } from "react";
 
 interface GenerateListItemProps {
-    items: NavbarItem[]
+  items: NavbarItem[];
 }
 
 const listIconButtonStyle: SxProps<Theme> = ({ palette }) => ({
-    paddingY: '4px',
+  paddingY: "4px",
 
-    '& .MuiListItemIcon-root': {
-        minWidth: '38px',
+  "& .MuiListItemIcon-root": {
+    minWidth: "38px",
+  },
+
+  "&.Mui-selected": {
+    "& .MuiListItemIcon-root": {
+      color: palette.primary.main,
     },
 
-    '&.Mui-selected': {
-        '& .MuiListItemIcon-root': {
-            color: palette.primary.main,
-        },
-
-        '& .MuiTypography-root': {
-            color: palette.primary.main,
-        },
+    "& .MuiTypography-root": {
+      color: palette.primary.main,
     },
-})
+  },
+});
 
-export const GenerateMiniListItem: FunctionComponent<GenerateListItemProps> = ({ items }) => {
-    return (
-        <List
-            disablePadding
-            component='div'
-            sx={() => ({
-                paddingTop: '4.75rem',
-                transition: 'transform 0.3s ease-in-out',
-                '&:enter': {
-                    transform: 'translateX(-100%)',
-                },
-                '&:enter-active': {
-                    transform: 'translateX(0)',
-                },
-            })}
-        >
-            {items?.map((item, index) => {
-                return <NavbarButton {...item} key={index} />
-            })}
-        </List>
-    )
-}
+export const GenerateMiniListItem: FunctionComponent<GenerateListItemProps> = ({
+  items,
+}) => {
+  return (
+    <List
+      disablePadding
+      component="div"
+      sx={() => ({
+        paddingTop: "4.75rem",
+        transition: "transform 0.3s ease-in-out",
+        "&:enter": {
+          transform: "translateX(-100%)",
+        },
+        "&:enter-active": {
+          transform: "translateX(0)",
+        },
+      })}
+    >
+      {items?.map((item, index) => {
+        return <NavbarButton {...item} key={index} />;
+      })}
+    </List>
+  );
+};
 
 const NavbarButton = ({ path, children = [], icon, name }: NavbarItem) => {
-    const { push, path: currentPathname }: any = useRouter()
+  const { push, path: currentPathname }: any = useRouter();
 
-    const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false);
 
-    const ref = useRef<any>(null)
+  const ref = useRef<any>(null);
 
-    const handleNavigate = () => push(path)
+  const handleNavigate = () => push(path);
 
-    const user = useAuth().value.user
+  const user = useAuth().value.user;
 
-    const statusUser = user?.status
+  const statusUser = user?.status;
 
-    const [openModalLockFeature, setOpenModalLockFeature] = useState(false)
+  const [openModalLockFeature, setOpenModalLockFeature] = useState(false);
 
-    const tonggleModalLockFeature = () => {
-        setOpenModalLockFeature(!openModalLockFeature)
-    }
+  const tonggleModalLockFeature = () => {
+    setOpenModalLockFeature(!openModalLockFeature);
+  };
 
-    const handleCloseMenu = () => setOpen(false)
+  const handleCloseMenu = () => setOpen(false);
 
-    const onClick: ListItemButtonProps['onClick'] = () => {
-        handleNavigate()
-    }
+  const onClick: ListItemButtonProps["onClick"] = () => {
+    handleNavigate();
+  };
 
-    const handleOpenMenu = () => setOpen(true)
+  const handleOpenMenu = () => setOpen(true);
 
-    const isAlvailableChildren = children.length > 0
+  const isAlvailableChildren = children.length > 0;
 
-    const getIsSelected = (path: string) => currentPathname === path
+  const getIsSelected = (path: string) => currentPathname === path;
 
-    const someChildrenSelected = (children: NavbarItem[]) => children.some(data => data.path === currentPathname)
+  const someChildrenSelected = (children: NavbarItem[]) =>
+    children.some((data) => data.path === currentPathname);
 
-    return (
-        <>
-            <Tooltip
-                placement='right'
-                title={<Typography sx={{ color: 'white' }}>{name}</Typography>}
-                enterNextDelay={500}
-            >
+  return (
+    <>
+      <Tooltip
+        placement="right"
+        title={<Typography sx={{ color: "white" }}>{name}</Typography>}
+        enterNextDelay={500}
+      >
+        <ListItemButton
+          ref={ref}
+          sx={{
+            padding: "8px",
+            textAlign: "center",
+            width: "2.5rem",
+            height: "2.5rem",
+            margin: "auto",
+          }}
+          onClick={isAlvailableChildren ? handleOpenMenu : onClick}
+          selected={getIsSelected(path) || someChildrenSelected(children || [])}
+        >
+          <Icon fontSize="1.2rem" icon={icon} />
+        </ListItemButton>
+      </Tooltip>
+
+      <SzhsinMenu
+        transition
+        direction="right"
+        portal
+        anchorRef={ref}
+        offsetX={15}
+        state={open ? "open" : "closed"}
+        onClose={handleCloseMenu}
+      >
+        {children.map((item, index) => {
+          const { path, name, icon, children } = item;
+          const handleNavigate = () => push(path);
+
+          const onClick: ListItemButtonProps["onClick"] = () => {
+            handleNavigate();
+            handleCloseMenu();
+          };
+
+          const listSubIconIconStyle: SxProps<Theme> = () => ({
+            opacity: 1,
+          });
+
+          return (
+            <ListItem component="div" disablePadding key={index}>
+              <Tooltip
+                title={<Typography sx={{ color: "white" }}>{name}</Typography>}
+                placement="right"
+              >
                 <ListItemButton
-                    ref={ref}
-                    sx={{ padding: '8px', textAlign: 'center', width: '2.5rem', height: '2.5rem', margin: 'auto' }}
-                    onClick={isAlvailableChildren ? handleOpenMenu : onClick}
-                    selected={getIsSelected(path) || someChildrenSelected(children || [])}
+                  sx={listIconButtonStyle}
+                  selected={
+                    getIsSelected(path) || someChildrenSelected(children || [])
+                  }
+                  onClick={onClick}
                 >
-                    <Icon fontSize='1.2rem' icon={icon} />
+                  <ListItemIcon sx={listSubIconIconStyle}>
+                    <Icon fontSize="1.2rem" icon={icon} />
+                  </ListItemIcon>
+
+                  <ListItemText
+                    primary={name}
+                    sx={listSubIconIconStyle}
+                    primaryTypographyProps={{ sx: { fontSize: 12.5 } }}
+                  />
                 </ListItemButton>
-            </Tooltip>
-
-            <SzhsinMenu
-                transition
-                direction='right'
-                portal
-                anchorRef={ref}
-                offsetX={15}
-                state={open ? 'open' : 'closed'}
-                onClose={handleCloseMenu}
-            >
-                {children.map((item, index) => {
-                    const { path, name, icon, children } = item
-                    const handleNavigate = () => push(path)
-
-                    const onClick: ListItemButtonProps['onClick'] = () => {
-                        handleNavigate()
-                        handleCloseMenu()
-                    }
-
-                    const listSubIconIconStyle: SxProps<Theme> = () => ({
-                        opacity: 1,
-                    })
-
-                    return (
-                        <ListItem component='div' disablePadding key={index}>
-                            <Tooltip title={<Typography sx={{ color: 'white' }}>{name}</Typography>} placement='right'>
-                                <ListItemButton
-                                    sx={listIconButtonStyle}
-                                    selected={getIsSelected(path) || someChildrenSelected(children || [])}
-                                    onClick={onClick}
-                                >
-                                    <ListItemIcon sx={listSubIconIconStyle}>
-                                        <Icon fontSize='1.2rem' icon={icon} />
-                                    </ListItemIcon>
-
-                                    <ListItemText
-                                        primary={name}
-                                        sx={listSubIconIconStyle}
-                                        primaryTypographyProps={{ sx: { fontSize: 12.5 } }}
-                                    />
-
-
-                                </ListItemButton>
-                            </Tooltip>
-                        </ListItem>
-                    )
-                })}
-            </SzhsinMenu>
-
-        </>
-    )
-}
+              </Tooltip>
+            </ListItem>
+          );
+        })}
+      </SzhsinMenu>
+    </>
+  );
+};
